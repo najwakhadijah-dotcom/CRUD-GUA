@@ -35,6 +35,7 @@
             line-height: 1.6;
         }
 
+        /* Sidebar Styles */
         .sidebar {
             position: fixed;
             top: 0;
@@ -43,27 +44,52 @@
             height: 100%;
             background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
+            transition: all 0.3s;
             z-index: 1000;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
         }
 
+        .dark-mode .sidebar {
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+        }
+
         .sidebar-header {
             padding: 20px;
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
         }
 
         .sidebar-logo {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            opacity: 0.9;
         }
 
         .sidebar-menu {
             flex: 1;
             overflow-y: auto;
             padding: 20px 0;
+        }
+
+        .sidebar-menu::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar-menu::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .sidebar-menu::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar-menu::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .menu-item {
@@ -254,7 +280,7 @@
                 <span>Feedback</span>
             </a>
             <a href="/admin/proyektor" class="menu-item active">
-                <i class="fas fa-projector"></i>
+                <i class="fas fa-video"></i>
                 <span>Proyektor</span>
             </a>
             <a href="/admin/jadwalperkuliahan" class="menu-item">

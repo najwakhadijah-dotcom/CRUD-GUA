@@ -1,28 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectorController;
-use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\JadwalPerkuliahanController;
+
 
 Route::get('/', function () {
-    return redirect()->route('peminjaman.index');
+    return redirect()->route('user.projectors.index');
 });
 
-Route::prefix('peminjaman')->name('peminjaman.')->group(function () {
-    Route::get('/', [PeminjamanController::class, 'index'])->name('index');
-    Route::get('/create', [PeminjamanController::class, 'create'])->name('create');
-    Route::post('/store', [PeminjamanController::class, 'store'])->name('store');
-    Route::get('/edit/{id}', [PeminjamanController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [PeminjamanController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [PeminjamanController::class, 'destroy'])->name('delete');
+// Routes untuk user
+Route::prefix('user')->name('user.')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('user.dashboard');
+    })->name('dashboard');
+
+    // Proyektor routes
+    Route::get('/projectors', [ProjectorController::class, 'index'])->name('projectors.index');
+    Route::get('/projectors/{id}', [ProjectorController::class, 'show'])->name('projectors.show');
+
+    // Riwayat (placeholder)
+    Route::get('/riwayat', function () {
+        return view('user.riwayat');
+    })->name('riwayat');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::put('/peminjaman/{id}/approve', [AdminController::class, 'approve'])->name('peminjaman.approve');
-    Route::put('/peminjaman/{id}/reject', [AdminController::class, 'reject'])->name('peminjaman.reject');
-});
+// Route root redirect ke dashboard user
+Route::redirect('/', '/user/dashboard');
 
 // Routes untuk manajemen proyektor
 Route::resource('projectors', ProjectorController::class);
@@ -34,3 +39,8 @@ Route::get('/admin', function () {
 
 // Route untuk halaman proyektor (alternatif)
 Route::get('/admin/proyektor', [ProjectorController::class, 'index'])->name('admin.proyektor');
+
+// Halaman utama jadwal perkuliahan
+ Route::resource('jadwal-perkuliahan', JadwalPerkuliahanController::class);
+
+

@@ -13,8 +13,8 @@ return new class extends Migration
             $table->string('kode_proyektor')->unique();
             $table->string('merk');
             $table->string('model');
-            $table->enum('status', ['tersedia', 'dipinjam', 'rusak'])->default('tersedia');
             $table->text('keterangan')->nullable();
+            $table->enum('status', ['tersedia', 'dipinjam', 'rusak'])->default('tersedia');
             $table->timestamps();
         });
     }

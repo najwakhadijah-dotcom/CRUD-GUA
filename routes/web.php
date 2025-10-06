@@ -40,7 +40,17 @@ Route::get('/admin', function () {
 // Route untuk halaman proyektor (alternatif)
 Route::get('/admin/proyektor', [ProjectorController::class, 'index'])->name('admin.proyektor');
 
+// Tambahkan INI SEBELUM resource
+Route::delete('jadwal-perkuliahan/delete-all', [JadwalPerkuliahanController::class, 'deleteAll'])
+    ->name('jadwal-perkuliahan.delete-all');
+
 // Halaman utama jadwal perkuliahan
  Route::resource('jadwal-perkuliahan', JadwalPerkuliahanController::class);
 
+ Route::post('/admin/jadwal-perkuliahan/import', [JadwalPerkuliahanController::class, 'import'])
+    ->name('jadwal-perkuliahan.import');
 
+Route::get('/template', [JadwalPerkuliahanController::class, 'downloadTemplate'])->name('template');
+
+Route::post('jadwal-perkuliahan/delete-all', [JadwalPerkuliahanController::class, 'deleteAll'])
+    ->name('jadwal-perkuliahan.delete-all');
